@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Book from './components/Book'
 import Searchbar from './components/Searchbar';
 import Results from './components/Results';
 
@@ -10,8 +9,7 @@ function App() {
   const [isSubmitted, changeSubmitValue] = useState(false);
 
   const fetchResults = async (q) => {
-    const response = await (await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`)).json();
-    console.log(response.docs);
+    const response = await (await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`, { mode: 'cors'})).json();
     return response.docs;
   };
 
@@ -21,7 +19,11 @@ function App() {
     const q = e.target[1].value;
     const docs = await fetchResults(q);
 
-    setResults(docs);
+    try {
+      setResults(docs);
+    } catch (e) {
+      console.log(e.message);
+    }
 
     changeSubmitValue(true);
   };
@@ -29,19 +31,19 @@ function App() {
   if (isSubmitted) {
     return (
       <div className="bg-neutral-900 h-screen flex flex-col items-center justify-center">
-        <div className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
+        <main className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
           
           <Results results={results}/>
-        </div>
+        </main>
       </div>
     )
   } else {
     return (
       <div className="bg-neutral-900 h-screen flex flex-col items-center justify-center">
-        <div className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
+        <main className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
-        </div>
+        </main>
       </div>
     )
   }
