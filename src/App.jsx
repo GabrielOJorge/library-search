@@ -9,7 +9,7 @@ function App() {
   const [isSubmitted, changeSubmitValue] = useState(false);
 
   const fetchResults = async (q) => {
-    const response = await (await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`, { mode: 'cors'})).json();
+    const response = await (await fetch(`https://openlibrary.org/search.json?q=${q}&limit=6`, { mode: 'cors'})).json();
     return response.docs;
   };
 
@@ -30,8 +30,8 @@ function App() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-neutral-900 h-screen flex flex-col items-center font-roboto-slab overflow-scroll">
-        <main className='bg-white w-10/12 max-w-[800px] p-4 my-10 rounded h-min'>
+      <div className='container bg-neutral-900 h-screen flex flex-col items-center font-roboto-slab overflow-scroll'>
+        <main className='bg-white w-10/12 max-w-[800px] p-4 my-10 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
           
           <Results results={results}/>
@@ -40,8 +40,8 @@ function App() {
     )
   } else {
     return (
-      <div className="bg-neutral-900 h-screen flex flex-col items-center justify-center font-roboto-slab">
-        <main className='bg-white w-11/12 max-w-[800px] p-4 rounded h-min'>
+      <div className='container bg-neutral-900 h-screen flex flex-col items-center justify-center font-roboto-slab'>
+        <main className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
         </main>
       </div>
