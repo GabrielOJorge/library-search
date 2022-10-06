@@ -9,20 +9,23 @@ function App() {
   const [isSubmitted, changeSubmitValue] = useState(false);
 
   const fetchResults = async (q) => {
-    const response = await (await fetch(`https://openlibrary.org/search.json?q=${q}&limit=6`, { mode: 'cors'})).json();
-    return response.docs;
+    const response = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`, { mode: 'cors'});
+
+    return await response.json();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const q = e.target[1].value;
-    const docs = await fetchResults(q);
+    const response = await fetchResults(q);
 
     try {
-      setResults(docs);
+      setResults(response.docs);
     } catch (e) {
       console.log(e.message);
+
+
     }
 
     changeSubmitValue(true);
