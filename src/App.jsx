@@ -30,7 +30,7 @@ function App() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-neutral-900 h-screen flex flex-col items-center justify-center font-roboto-slab">
+      <div className="bg-neutral-900 h-screen flex flex-col items-center font-roboto-slab overflow-scroll">
         <main className='bg-white w-10/12 max-w-[800px] p-4 my-10 rounded h-min'>
           <Searchbar handleSubmit={handleSubmit}/>
           
