@@ -7,25 +7,34 @@ import './index.css'
 function App() {
   const [results, setResults] = useState([]);
   const [isSubmitted, changeSubmitValue] = useState(false);
+  const [didResponseReturn, changeResponseReturnValue] = useState(false);
 
   const fetchResults = async (q) => {
-    const response = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`, { mode: 'cors'});
+    try {
+      const response = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=5`, { mode: 'cors'});
 
-    return await response.json();
+      if (!response.ok) {
+        throw Error('Could not fetch data for that resource.');
+      }
+
+      return await response.json();
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const q = e.target[1].value;
-    const response = await fetchResults(q);
 
     try {
+      const response = await fetchResults(q);
       setResults(response.docs);
-    } catch (e) {
-      console.log(e.message);
-
-
+      changeResponseReturnValue(true);
+    } catch (err) {
+      console.error(err.message);
+      changeResponseReturnValue(false);
     }
 
     changeSubmitValue(true);
@@ -37,7 +46,7 @@ function App() {
         <main className='bg-white w-10/12 max-w-[800px] p-4 my-10 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
           
-          <Results results={results}/>
+          <Results results={results} didResponseReturn={didResponseReturn}/>
         </main>
       </div>
     )
