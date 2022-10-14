@@ -2,7 +2,7 @@ import Book from "../Book"
 
 function Results({ results, didResponseReturn }) {
   const formatResults = (results) => {
-    return results.map(result => <Book title={result.title} author={result.author_name} date={result.first_publish_year} coverID={result.cover_edition_key}/>)
+    return results.map(result => <Book key={result.key} title={result.title} author={result.author_name[0]} date={result.first_publish_year} coverID={result.cover_edition_key}/>)
   };
 
   if (results.length && didResponseReturn) {
