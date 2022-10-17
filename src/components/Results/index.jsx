@@ -1,6 +1,5 @@
-import { useState } from "react";
-import Book from "../Book"
-import Loader from "../Loader";
+import Book from '../Book'
+import Loader from '../Loader';
 
 function Results({ results, loading }) {
   const formatResults = (results) => {
@@ -10,23 +9,15 @@ function Results({ results, loading }) {
   if (loading) {
     return <Loader />;
   } else if (!results) {
-    return (
-      <div>
-        <h1>Sorry, something went wrong. Please try again.</h1>
-      </div>
-    )
+    return <h1 className='self-center text-xl font-bold py-2'>Sorry, something went wrong. Please try again.</h1>;
   } else if (results.length) {
     return (
-      <ul className="flex flex-col gap-4">
+      <ul className='flex flex-col gap-4'>
         {formatResults(results)}
       </ul>
     )
-  } else if (!results.length) {
-    return (
-      <div>
-        <h1>No results found.</h1>
-      </div>
-    )
+  } else {
+    return <h1 className='self-center text-xl font-bold py-2'>No results found.</h1>;
   }
 }
 
