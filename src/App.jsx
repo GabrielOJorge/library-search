@@ -25,8 +25,10 @@ function App() {
   };
 
   const handleSubmit = async (e) => {
-    changeSubmitValue(true);
     e.preventDefault();
+    
+    setResults(null);
+    changeSubmitValue(true);
 
     const q = e.target[1].value;
 
