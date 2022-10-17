@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import Searchbar from './components/Searchbar';
 import Results from './components/Results';
-import Loader from './components/Loader';
 
 import './index.css'
 
 function App() {
   const [results, setResults] = useState(null);
   const [isSubmitted, changeSubmitValue] = useState(false);
-  const [didResponseReturn, changeResponseReturnValue] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchResults = async (q) => {
     try {
@@ -27,19 +26,20 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    setResults(null);
+    setLoading(true);
     changeSubmitValue(true);
 
     const q = e.target[1].value;
 
     try {
       const response = await fetchResults(q);
+      console.log(response);
       setResults(response.docs);
-      changeResponseReturnValue(true);
     } catch (err) {
       console.error(err.message);
-      changeResponseReturnValue(false);
     }
+
+    setLoading(false);
   };
 
   if (isSubmitted) {
@@ -47,8 +47,7 @@ function App() {
       <div className='bg-neutral-900 w-full h-screen flex flex-col items-center font-roboto-slab overflow-scroll'>
         <main className='bg-white flex flex-col w-10/12 max-w-[800px] p-4 my-10 rounded'>
           <Searchbar handleSubmit={handleSubmit}/>
-
-          {results ? <Results results={results} didResponseReturn={didResponseReturn}/> : <Loader />}
+          <Results results={results} loading={loading}/>
         </main>
       </div>
     )
