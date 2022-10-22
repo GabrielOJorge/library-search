@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .active-page-number {
+    @apply relative z-10 inline-flex items-center border border-neutral-500 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-600 focus:z-20;
+  }
+
+  .page-number {
+    @apply relative inline-flex items-center border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100 focus:z-20;
+  }
+
+  .previous-page-arrow {
+    @apply relative inline-flex items-center rounded-l-md border border-neutral-300 bg-white px-2 py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100 focus:z-20;
+  }
+
+  .next-page-arrow {
+    @apply relative inline-flex items-center rounded-r-md border border-neutral-300 bg-white px-2 py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100 focus:z-20;
+  }
+}
