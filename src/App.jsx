@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Searchbar from './components/Searchbar';
 import Results from './components/Results';
 import Pagination from './components/Pagination';
-import ReactPaginate from 'react-paginate';
 
 import './index.css';
 import Loader from './components/Loader';
@@ -36,6 +35,7 @@ function App() {
     e.preventDefault();
     setLoading(true);
     changeSubmitValue(true);
+    setCurrentPage(1);
 
     const q = e.target[1].value;
 
@@ -64,14 +64,14 @@ function App() {
           ) : (
             <>
               <Results results={currentResults} loading={loading} />
-              {/* <Pagination
+              <Pagination
                 resultsPerPage={resultsPerPage}
                 currentPage={currentPage}
                 totalResults={results.length}
                 setCurrentPage={setCurrentPage}
-              /> */}
+              />
 
-              <Pagination resultsPerPage={resultsPerPage} />
+              {/* <Pagination resultsPerPage={resultsPerPage} /> */}
             </>
           )}
         </main>
