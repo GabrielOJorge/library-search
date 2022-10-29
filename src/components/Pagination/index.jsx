@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import ReactPaginate from 'react-paginate';
 import { NextPage } from './components/NextPage';
 import { PreviousPage } from './components/PreviousPage';
@@ -28,7 +26,6 @@ function Pagination({
       currentPage > 1 &&
       currentPage < pageNumbers[pageNumbers.length - 1]
     ) {
-      // eslint-disable-next-line no-unused-expressions
       direction === 'next'
         ? setCurrentPage(currentPage + 1)
         : setCurrentPage(currentPage - 1);
@@ -94,7 +91,9 @@ function Pagination({
               previousLinkClassName='page previous'
               nextLinkClassName='page next'
               activeClassName='active'
-              breakClassName='page break'
+              breakClassName='page'
+              breakLinkClassName='page-link'
+              onClick={() => (location.href = '#logo')}
             />
           </nav>
         </div>

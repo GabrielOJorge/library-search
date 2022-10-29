@@ -55,35 +55,57 @@ function App() {
 
   if (isSubmitted) {
     return (
-      <div className='bg-neutral-900 w-full h-screen flex flex-col items-center font-roboto-slab overflow-scroll'>
-        <main className='bg-white flex flex-col w-10/12 max-w-[800px] p-4 my-10 rounded'>
-          <Searchbar handleSubmit={handleSubmit} />
+      <div className='bg-neutral-900 h-screen flex flex-col items-center font-roboto-slab overflow-scroll'>
+        <div id='logo' className='w-10/12 flex flex-col items-center my-20'>
+          <div className='text-neutral-100 flex flex-col items-center gap-6 pb-20 text-center'>
+            <div className='flex flex-col items-center'>
+              <i className='fa-solid fa-book text-7xl mb-4'></i>
+              <h1 className='text-4xl font-black'>Library Search</h1>
+            </div>
+            <p className='text-xl'>
+              You can search for a book, author, subject or even a specific
+              sentence in a book.
+            </p>
+          </div>
+          <main className='bg-white flex flex-col w-full max-w-[800px] p-4 rounded'>
+            <Searchbar handleSubmit={handleSubmit} />
 
-          {loading ? (
-            <Loader />
-          ) : (
-            <>
-              <Results results={currentResults} loading={loading} />
-              <Pagination
-                resultsPerPage={resultsPerPage}
-                currentPage={currentPage}
-                totalResults={results.length}
-                setCurrentPage={setCurrentPage}
-              />
-
-              {/* <Pagination resultsPerPage={resultsPerPage} /> */}
-            </>
-          )}
-        </main>
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <Results results={currentResults} loading={loading} />
+                <Pagination
+                  resultsPerPage={resultsPerPage}
+                  currentPage={currentPage}
+                  totalResults={results.length}
+                  setCurrentPage={setCurrentPage}
+                />
+              </>
+            )}
+          </main>
+        </div>
       </div>
     );
   }
 
   return (
     <div className='bg-neutral-900 h-screen flex flex-col items-center justify-center font-roboto-slab'>
-      <main className='bg-white w-11/12 max-w-[800px] p-4 rounded'>
-        <Searchbar handleSubmit={handleSubmit} />
-      </main>
+      <div id='logo' className='w-10/12 flex flex-col items-center my-20'>
+        <div className='text-neutral-100 flex flex-col items-center gap-6 pb-20 text-center'>
+          <div className='flex flex-col items-center'>
+            <i className='fa-solid fa-book text-7xl mb-4'></i>
+            <h1 className='text-4xl font-black'>Library Search</h1>
+          </div>
+          <p className='text-xl'>
+            You can search for a book, author, subject or even a specific
+            sentence in a book.
+          </p>
+        </div>
+        <main className='bg-white w-full max-w-[800px] p-4 rounded'>
+          <Searchbar handleSubmit={handleSubmit} />
+        </main>
+      </div>
     </div>
   );
 }
