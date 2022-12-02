@@ -1,4 +1,5 @@
 import ReactPaginate from 'react-paginate';
+
 import { NextPage } from './components/NextPage';
 import { PreviousPage } from './components/PreviousPage';
 
